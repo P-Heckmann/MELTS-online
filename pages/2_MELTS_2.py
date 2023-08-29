@@ -2,14 +2,7 @@ import matplotlib.pyplot as plt
 
 # import PySulfSat as ss
 import pyMELTScalc as M
-
-import pandas as pd
-import multiprocessing
 import streamlit as st
-
-# import Streamlit_app
-# import base64
-# import os
 
 
 st.write("## MELTS-online")
@@ -80,22 +73,22 @@ if calculate_button:
         dt_C=deltat_C,
         P_bar=P,
     )
-    MELTS = MELTS_FC["All"]
-    df = st.dataframe(MELTS)
+    # MELTS = MELTS_FC["All"]
+    # df = st.dataframe(MELTS)
 
     # Add a calculate button
-    @st.cache_data
-    def convert_df(df):
-        # IMPORTANT: Cache the conversion to prevent computation on every rerun
-        return df.to_csv().encode("utf-8")
+    # @st.cache_data
+    # def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    #    return df.to_csv().encode("utf-8")
 
-    csv = convert_df(MELTS)
-    st.download_button(
-        label="Download data as CSV",
-        data=csv,
-        file_name="MELTS_output.csv",
-        mime="text/csv",
-    )
+    # csv = convert_df(MELTS)
+    # st.download_button(
+    #    label="Download data as CSV",
+    #    data=csv,
+    #    file_name="MELTS_output.csv",
+    #    mime="text/csv",
+    # )
 
 
 # folder_path = '../'

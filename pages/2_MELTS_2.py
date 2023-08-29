@@ -74,8 +74,11 @@ if calculate_button:
         dt_C=deltat_C,
         P_bar=P,
     )
-    MELTS = MELTS_FC["All"]
-    # df = st.dataframe(MELTS)
+    try:
+        MELTS = MELTS_FC["All"]
+    except KeyError as e:
+        st.write("Error accessing 'All' key in MELTS_FC:", e)
+    df = st.dataframe(MELTS)
 
     # Add a calculate button
     # @st.cache_data

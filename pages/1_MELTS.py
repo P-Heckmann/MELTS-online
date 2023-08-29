@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 # import PySulfSat as ss
 import pyMELTScalc as M
 
-# import pandas as pd
+import pandas as pd
 import multiprocessing
 import streamlit as st
 

@@ -1,8 +1,4 @@
-import matplotlib.pyplot as plt
-
-# import PySulfSat as ss
 import pyMELTScalc as M
-
 import pandas as pd
 import multiprocessing
 import streamlit as st
@@ -21,10 +17,6 @@ def main():
     )
 
     st.markdown("---")
-
-    # file = r"C:\Users\paulh\Desktop\Nucleation\data\Glass_input_example.xlsx"
-    # df = ss.import_data(file, suffix="_Liq")
-    # sample = df.iloc[0]
 
     SiO2_Liq = st.number_input("SiO2:", value=50.822, key="SiO2")
     NaO2_Liq = st.number_input("Na2O:", value=2.49, key="Na2O")

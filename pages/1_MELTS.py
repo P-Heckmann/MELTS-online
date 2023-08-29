@@ -7,9 +7,9 @@ import pandas as pd
 import multiprocessing
 import streamlit as st
 
-# import Streamlit_app
-# import base64
-# import os
+import sys
+
+sys.path.append("package")
 
 
 st.write("## MELTS-online")

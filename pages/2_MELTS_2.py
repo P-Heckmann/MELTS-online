@@ -28,6 +28,7 @@ Al2O3_Liq = st.number_input("Al2O3:", value=13.235, key="Al2O3")
 P2O5_Liq = st.number_input("P2O5:", value=0.189, key="P2O5")
 H2O_Liq = st.number_input("H2O:", value=0.1, key="H2O")
 Fe3Fet_Liq = st.number_input("Fe3Fet_Liq:", value=0.1, key="Fe3Fet_Liq")
+
 sample = {
     "SiO2_Liq": SiO2_Liq,
     "Na2O_Liq": NaO2_Liq,

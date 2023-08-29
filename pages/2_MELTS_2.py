@@ -59,6 +59,7 @@ st.markdown("---")
 # Add a calculate button
 calculate_button = st.button("Calculate")
 
+
 if calculate_button:
     MELTS_FC = M.multi_path(
         Model=Model_selected,
@@ -73,7 +74,7 @@ if calculate_button:
         dt_C=deltat_C,
         P_bar=P,
     )
-    # MELTS = MELTS_FC["All"]
+    MELTS = MELTS_FC["All"]
     # df = st.dataframe(MELTS)
 
     # Add a calculate button

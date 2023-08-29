@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 # import PySulfSat as ss
 import pyMELTScalc as M
 import streamlit as st
-
+import meltsdynamic
+import meltsengine
+import meltsstatus
 
 st.write("## MELTS-online")
 

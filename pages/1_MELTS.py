@@ -93,8 +93,8 @@ def main():
             dt_C=deltat_C,
             P_bar=P,
         )
-
-        st.write(MELTS_FC)
+        print("MELTS_FC:", MELTS_FC)  # Debugging output
+        # st.write(MELTS_FC)
 
         # MELTS = MELTS_FC["All"]
 

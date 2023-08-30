@@ -6,7 +6,9 @@ import streamlit as st
 
 import sys
 
-sys.path.append("package")
+import sys
+
+sys.path.append("../package")
 
 st.write("## MELTS-online")
 

@@ -1,10 +1,6 @@
 import matplotlib.pyplot as plt
-
-# import PySulfSat as ss
 import pyMELTScalc as M
 import streamlit as st
-
-import sys
 
 import sys
 

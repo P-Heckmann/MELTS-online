@@ -114,5 +114,5 @@ def main():
 # files_to_delete = ['Bulk_comp_tbl.txt', 'Liquid_comp_tbl.txt', 'Phase_main_tbl.txt','Solid_comp_tbl','System_main_tbl.txt']
 
 if __name__ == "__main__":
-    multiprocessing.freeze_support()  # This line is not necessary for Streamlit apps
+    # multiprocessing.freeze_support()  # This line is not necessary for Streamlit apps
     main()

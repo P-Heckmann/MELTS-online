@@ -1,10 +1,9 @@
-import matplotlib.pyplot as plt
 import pyMELTScalc as M
 import streamlit as st
 
-import sys
+# import sys
 
-sys.path.append("../package")
+# sys.path.append("../package")
 
 st.write("## MELTS-online")
 

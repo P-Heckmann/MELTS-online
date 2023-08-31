@@ -1,11 +1,10 @@
 import pyMELTScalc as M
-import pandas as pd
 import multiprocessing
 import streamlit as st
 
-import sys
+# import sys
 
-sys.path.append("../package")
+# sys.path.append("../package")
 
 
 st.write("## MELTS-online")
@@ -76,7 +75,6 @@ def main():
             Model=Model_selected,
             Fe3Fet_Liq=Fe3Fet_Liq,
             H2O_Liq=H2O_Liq,
-            # comp=sample.to_dict(),
             comp=sample,
             Frac_solid=Frac_solid,
             Frac_fluid=Frac_fluid,
@@ -114,5 +112,5 @@ def main():
 # files_to_delete = ['Bulk_comp_tbl.txt', 'Liquid_comp_tbl.txt', 'Phase_main_tbl.txt','Solid_comp_tbl','System_main_tbl.txt']
 
 if __name__ == "__main__":
-    # multiprocessing.freeze_support()  # This line is not necessary for Streamlit apps
+    multiprocessing.freeze_support()  # This line is not necessary for Streamlit apps
     main()

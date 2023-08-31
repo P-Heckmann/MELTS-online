@@ -55,7 +55,7 @@ def main():
         P_bar=P,
     )
 
-    print(MELTS_FC)
+    #print(MELTS_FC)
 
 
 if __name__ == "__main__":

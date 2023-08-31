@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from Functions import Create_Plagioclase_Plot
 
 st.write("## Plagioclase")

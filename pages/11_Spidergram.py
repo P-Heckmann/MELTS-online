@@ -25,7 +25,7 @@ st.markdown(
 st.write("### Example plot")
 
 example_file = "data\example_data_spidergram.xlsx"
-example_image = "data\example_pyroxene.png"
+example_image = "data\example_spidergram.png"
 
 st.image(
     example_image,
@@ -87,19 +87,21 @@ def main():
                 uploaded_df, normalization_reference
             )
 
-            st.write("Normalized DataFrame:")
-            st.dataframe(Normalized_uploaded_df)
+            # st.write("Normalized DataFrame:")
+            # st.dataframe(Normalized_uploaded_df)
 
-            """ image_buffer = Create_Spidergram(Normalized_uploaded_df)
+            image_buffer = Create_Spidergram(
+                Normalized_uploaded_df, normalization_reference
+            )
             st.image(image_buffer, caption="", width=800)  # Adjust width as needed
 
-            if st.button("Download Image"):
-                st.download_button(
-                    "Download Image",
-                    data=image_buffer,
-                    file_name="generated_image.png",
-                    key="download",
-                ) """
+            st.download_button(
+                label="Download diagram",
+                data=image_buffer,
+                file_name="generated_image.png",
+                mime="image/png",
+            )
+
         except Exception as e:
             st.error(f"An error occurred: {e}")
 

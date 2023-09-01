@@ -4,6 +4,7 @@ import mplstereonet
 import ternary
 from matplotlib import rc
 from io import BytesIO
+import numpy as np
 
 from matplotlib import pyplot as plt
 import matplotlib as mpl
@@ -195,13 +196,17 @@ def Create_Pyroxene_Plot(uploaded_df):
 
 def Spidergram_Normalization(uploaded_df, normalization_reference):
     src_file = r"data\Normalization_values.xlsx"
-    normalization_values = pd.read_excel(src_file, sheet_name="normalization_reference")
+    normalization_values = pd.read_excel(src_file, sheet_name=normalization_reference)
     normalization_elements = normalization_values.columns
 
     data = []
     Normalized_uploaded_df = pd.DataFrame(data)
 
     for col in normalization_elements:
+        Normalized_uploaded_df["sample"] = uploaded_df["sample"]
+        Normalized_uploaded_df["linestyle"] = uploaded_df["linestyle"]
+        Normalized_uploaded_df["hexcolor"] = uploaded_df["hexcolor"]
+        Normalized_uploaded_df["linewidth"] = uploaded_df["linewidth"]
         Normalized_uploaded_df[col] = (
             uploaded_df[col] / normalization_values[col].values
         )
@@ -209,8 +214,56 @@ def Spidergram_Normalization(uploaded_df, normalization_reference):
     return Normalized_uploaded_df
 
 
-""" def Create_Spidergram(Normalized_uploaded_df):
+def Create_Spidergram(Normalized_uploaded_df, normalization_reference):
     fig, ax = plt.subplots(figsize=(16, 8))
+
+    # Iterate through rows of the DataFrame
+    for index, row in Normalized_uploaded_df.iterrows():
+        sample = row["sample"]
+        linestyle = row["linestyle"]
+        hexcolor = row["hexcolor"]
+        linewidth = row["linewidth"]
+
+        # Extract the data series for this row (use column names for x labels)
+        data_series = row[4:]  # Assuming the actual data starts from the 5th column
+
+        ax.tick_params(axis="y", which="both", labelsize=16, width=1, length=5)
+        ax.tick_params(axis="x", labelsize=16, width=1, length=5)
+        ax.set_yscale("log")
+        ax.yaxis.set_major_formatter(mpl.ticker.ScalarFormatter())
+        ax.ticklabel_format(style="plain", axis="y", useOffset=False, useMathText=True)
+
+        # Plot the data on the spidergram, using column names as x labels
+        plt.plot(
+            data_series,
+            "-o",
+            linestyle=linestyle,
+            linewidth=linewidth,
+            color=hexcolor,
+            label=sample,
+        )
+
+    # rc ("font", weight="bold")
+    # plt.yticks(weight="bold")
+    # plt.xticks(weight="bold", rotation=0)  # Rotate x-axis labels as needed
+    plt.ylabel(
+        f"Concentration / {normalization_reference}",
+        size=16,
+        # fontweight="bold",
+    )
+    plt.grid(False)
+    plt.legend()
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png")
+    buffer.seek(0)
+    plt.close()
+
+    return buffer
+
+
+"""  
+   fig, ax = plt.subplots(figsize=(16, 8))
     ax.tick_params(axis="y", which="both", labelsize=16, width=1, length=5)
     ax.tick_params(axis="x", labelsize=16, width=1, length=5)
     ax.set_yscale("log")
@@ -218,19 +271,24 @@ def Spidergram_Normalization(uploaded_df, normalization_reference):
     # ax.yaxis.set_minor_formatter(mpl.ticker.ScalarFormatter())
     ax.ticklabel_format(style="plain", axis="y", useOffset=False, useMathText=True)
 
-    for s, ls, l, c in zip(samples, linestyle, legend_label, color):
-        x = data.loc[data["Label"] == s]
+    for samp, ls, color, lab in zip(
+        Normalized_uploaded_df["sample"],
+        Normalized_uploaded_df["linestyle"],
+        Normalized_uploaded_df["hexcolor"],
+        Normalized_uploaded_df.columns,
+    ):
+        x = Normalized_uploaded_df.loc[Normalized_uploaded_df["sample"] == samp]
         x = x.where(pd.notnull(x), None)
         x = x.to_numpy()
         x = np.delete(x, 0)
-        plt.plot(xlabel, x, "-o", linestyle=ls, label=l, color=c)
+        plt.plot(lab, x, "-o", linestyle=ls, color=color)
 
     rc("font", weight="bold")
     plt.yticks(weight="bold")
     plt.xticks(weight="bold")
     plt.xticks(rotation=0)
     plt.ylabel("Concentration/Primitive mantle", size=16, fontweight="bold")
-    plt.legend(fontsize=16)
+    # plt.legend(fontsize=16)
     plt.grid(False)
 
     buffer = BytesIO()

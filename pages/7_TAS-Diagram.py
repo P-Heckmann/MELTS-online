@@ -69,19 +69,19 @@ def main():
                 if uploaded_file.name.endswith(".xlsx")
                 else pd.read_csv(uploaded_file)
             )
-            st.write("Uploaded DataFrame:")
-            st.dataframe(uploaded_df)
+            # st.write("Uploaded DataFrame:")
+            # st.dataframe(uploaded_df)
 
             image_buffer = Create_TAS_Plot(uploaded_df)
             st.image(image_buffer, caption="", width=800)  # Adjust width as needed
 
-            if st.button("Download Image"):
-                st.download_button(
-                    "Download Image",
-                    data=image_buffer,
-                    file_name="generated_image.png",
-                    key="download",
-                )
+            st.download_button(
+                label="Download diagram",
+                data=image_buffer,
+                file_name="generated_image.png",
+                mime="image/png",
+            )
+
         except Exception as e:
             st.error(f"An error occurred: {e}")
 

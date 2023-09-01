@@ -5,6 +5,11 @@ import ternary
 from matplotlib import rc
 from io import BytesIO
 
+from matplotlib import pyplot as plt
+import matplotlib as mpl
+from matplotlib import rc
+import pandas as pd
+
 
 def Create_TAS_Plot(uploaded_df):
     uploaded_df["Na2O + K2O"] = uploaded_df["Na2O"] + uploaded_df["K2O"]
@@ -171,7 +176,7 @@ def Create_Pyroxene_Plot(uploaded_df):
     tax.right_corner_label("Fs", fontsize=fontsize, offset=offset)
 
     # Decorations.
-    tax.legend(loc="best", prop={"size": 12})
+    # tax.legend(loc="best", prop={"size": 12})
     tax.boundary(linewidth=1)
     tax.gridlines(multiple=10, color="gray")
     tax.ticks(axis="lbr", linewidth=1, multiple=10)
@@ -186,3 +191,52 @@ def Create_Pyroxene_Plot(uploaded_df):
     plt.close()
 
     return buffer
+
+
+def Spidergram_Normalization(uploaded_df, normalization_reference):
+    src_file = r"data\Normalization_values.xlsx"
+    normalization_values = pd.read_excel(src_file, sheet_name="normalization_reference")
+    normalization_elements = normalization_values.columns
+
+    data = []
+    Normalized_uploaded_df = pd.DataFrame(data)
+
+    for col in normalization_elements:
+        Normalized_uploaded_df[col] = (
+            uploaded_df[col] / normalization_values[col].values
+        )
+
+    return Normalized_uploaded_df
+
+
+""" def Create_Spidergram(Normalized_uploaded_df):
+    fig, ax = plt.subplots(figsize=(16, 8))
+    ax.tick_params(axis="y", which="both", labelsize=16, width=1, length=5)
+    ax.tick_params(axis="x", labelsize=16, width=1, length=5)
+    ax.set_yscale("log")
+    ax.yaxis.set_major_formatter(mpl.ticker.ScalarFormatter())
+    # ax.yaxis.set_minor_formatter(mpl.ticker.ScalarFormatter())
+    ax.ticklabel_format(style="plain", axis="y", useOffset=False, useMathText=True)
+
+    for s, ls, l, c in zip(samples, linestyle, legend_label, color):
+        x = data.loc[data["Label"] == s]
+        x = x.where(pd.notnull(x), None)
+        x = x.to_numpy()
+        x = np.delete(x, 0)
+        plt.plot(xlabel, x, "-o", linestyle=ls, label=l, color=c)
+
+    rc("font", weight="bold")
+    plt.yticks(weight="bold")
+    plt.xticks(weight="bold")
+    plt.xticks(rotation=0)
+    plt.ylabel("Concentration/Primitive mantle", size=16, fontweight="bold")
+    plt.legend(fontsize=16)
+    plt.grid(False)
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png")
+    buffer.seek(0)
+    plt.close()
+
+    return buffer
+ """

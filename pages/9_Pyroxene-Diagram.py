@@ -8,6 +8,12 @@ st.write("## Plagioclase")
 st.markdown(
     """
     ---
+    ### How to create your plot:
+    
+    1) Checkout the example file serving as a template.
+    2) Upload your own file.
+    3) Download the plot as an image.
+    
     ### Info
     
     ---

@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
-from Functions import Create_Plagioclase_Plot
+from Functions import Spidergram_Normalization, Create_Spidergram
 
-st.write("## Plagioclase")
+
+st.write("## Spidergram")
 
 
 st.markdown(
@@ -23,8 +24,8 @@ st.markdown(
 
 st.write("### Example plot")
 
-example_file = "data\example_data_plagioclase.xlsx"
-example_image = "data\example_plagioclase.png"
+example_file = "data\example_data_spidergram.xlsx"
+example_image = "data\example_pyroxene.png"
 
 st.image(
     example_image,
@@ -50,6 +51,25 @@ st.download_button(
 st.markdown("---")
 
 
+normalization_reference = st.selectbox(
+    "Choose a normalization reference",
+    (
+        "MORB_Pearce_1983",
+        "MORB_Pearce_1996",
+        "OIB_Sun_1989",
+        "PRIMA_Long_Sun_1995",
+        "PRIMO_Wood_1979",
+        "REE_Chondrite_Nakamura_1974",
+        "EMORB_Sun_McDonough_1989",
+        "NMORB_Long_Sun_McDonough_1989",
+        "PRIMA_Long_Sun_McDonough_1989",
+        "REE_PRIMA_Sun_1995",
+        "REE_Chondrite_Boynton_1984",
+        "Bevins_1984",
+    ),
+)
+
+
 def main():
     st.write("### Excel/CSV Upload and Plot")
 
@@ -62,10 +82,15 @@ def main():
                 if uploaded_file.name.endswith(".xlsx")
                 else pd.read_csv(uploaded_file)
             )
-            st.write("Uploaded DataFrame:")
-            st.dataframe(uploaded_df)
 
-            image_buffer = Create_Plagioclase_Plot(uploaded_df)
+            Normalized_uploaded_df = Spidergram_Normalization(
+                uploaded_df, normalization_reference
+            )
+
+            st.write("Normalized DataFrame:")
+            st.dataframe(Normalized_uploaded_df)
+
+            """ image_buffer = Create_Spidergram(Normalized_uploaded_df)
             st.image(image_buffer, caption="", width=800)  # Adjust width as needed
 
             if st.button("Download Image"):
@@ -74,7 +99,7 @@ def main():
                     data=image_buffer,
                     file_name="generated_image.png",
                     key="download",
-                )
+                ) """
         except Exception as e:
             st.error(f"An error occurred: {e}")
 

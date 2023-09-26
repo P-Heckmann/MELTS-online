@@ -56,7 +56,7 @@ st.download_button(
 
 st.markdown("---")
 
-
+""" 
 def main():
     st.write("### Excel/CSV Upload and Plot")
 
@@ -88,3 +88,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+ """

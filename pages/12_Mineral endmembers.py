@@ -39,7 +39,7 @@ selected_mineral = st.selectbox(
 st.write("### Example output")
 
 
-example_file = "data\example_data_endmembers.xlsx"
+example_file = r"data\example_data_endmembers.xlsx"
 
 df = pd.read_excel(example_file)
 

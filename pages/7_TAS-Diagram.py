@@ -30,8 +30,8 @@ st.markdown(
 
 st.write("### Example plot")
 
-example_file = "data\example_data_tas.xlsx"
-example_image = "data\example_tas.png"
+example_file = r"data\example_data_tas.xlsx"
+example_image = r"data\example_tas.png"
 
 st.image(
     example_image,

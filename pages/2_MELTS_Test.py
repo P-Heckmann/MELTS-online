@@ -1,5 +1,6 @@
 import pyMELTScalc as M
 import streamlit as st
+import os
 
 # import sys
 
@@ -76,6 +77,32 @@ if calculate_button:
         P_bar=P,
     )
     st.write(MELTS_FC)
+
+    # Specify the folder path where the files are located
+    folder_path = ""
+
+    # List of files to delete
+    files_to_delete = [
+        "Bulk_comp_tbl.txt",
+        "Liquid_comp_tbl.txt",
+        "Phase_main_tbl.txt",
+        "Solid_comp_tbl.txt",
+        "System_main_tbl.txt",
+        "liquid-model-batch.inp",
+    ]
+
+    # Iterate through the list of files and delete them
+    for file_name in files_to_delete:
+        # Construct the full path to the file
+        file_path = os.path.join(folder_path, file_name)
+
+        # Check if the file exists before attempting to delete it
+        if os.path.exists(file_path):
+            # Delete the file
+            os.remove(file_path)
+            print(f"Deleted {file_name}")
+        else:
+            print(f"{file_name} not found")
 
     # try:
     #    MELTS = MELTS_FC["All"]

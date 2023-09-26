@@ -1,4 +1,4 @@
-import pandas as pd
+""" import pandas as pd
 
 test_file = "data\example_data_spidergram.xlsx"
 
@@ -20,3 +20,4 @@ for col in normalization_elements:
 # test_df[normalization_elements]
 
 Normalized_uploaded_df
+ """
